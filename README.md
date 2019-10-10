@@ -14,7 +14,7 @@
 3. 支持执行shellcode
 4. 支持32、64
 5. 可同时操作多个进程互不影响 线程安全
-6. python2、3支持 （基于python3.7.4、python2.7.16）
+6. python2、3支持 （基于[python-2716](https://www.python.org/downloads/release/python-2716/)、[python-374](https://www.python.org/downloads/release/python-374/)）
 
 ### 函数签名及作用:
 ```
@@ -138,6 +138,12 @@ get_expfun_info(...)
     get_expfun_info(self: kar98k.kar98k) -> std::vector<kar98k::_FUN_INFO,std::allocator<kar98k::_FUN_INFO> >
 	c++签名：std::vector<FUN_INFO>* get_expfun_info(){...}
 	作用：获取进程所有模块导出表信息
+	typedef struct _FUN_INFO {
+	size_t funRva;
+	size_t funAddress;
+	std::string funName;
+	std::string funSignature;
+	}FUN_INFO , *PFUN_INFO;
 	
 get_expfun_info_size(...)
     get_expfun_info_size(self: kar98k.kar98k) -> int
@@ -161,14 +167,11 @@ refresh_mod_info(...)
 	
 ```
 
-### 部分函数作用截图
+### 功能演示
 
-- 打印目标进程页面信息：`print_process_meminfo`
-![image](https://user-images.githubusercontent.com/16742566/66467246-b8fc4a00-eab6-11e9-8149-3d31ea2d7896.png)
+![image](https://i.vgy.me/0FrbUx.gif)
 
 
-- 打印目标进程模块内导入函数信息：`print_impinfo_by_module` （再结合其它函数对壳和shellcode分析很有用
-![image](https://user-images.githubusercontent.com/16742566/66467209-a5e97a00-eab6-11e9-8edc-de3f540a37ed.png)
 
 
 
@@ -191,6 +194,6 @@ https://github.com/stonedreamforest/kar98k_public/releases
 
 
 ### 更改日志
-[CHANGELOG.MD](https://github.com/stonedreamforest/kar98k_public/blob/master/CHANGELOG.MD)
+[CHANGELOG](https://github.com/stonedreamforest/kar98k_public/blob/master/CHANGELOG.MD)
 
 
